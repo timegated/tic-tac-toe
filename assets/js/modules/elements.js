@@ -1,0 +1,1 @@
+export const gameBoardDisplay = document.querySelector('#gameboard');

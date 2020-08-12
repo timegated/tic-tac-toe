@@ -12,5 +12,5 @@
 - Use functions that allow people to create marks on the gameBoard
 - Build logic that checks when the game is over
 - Consider option of having players compete against the computer
-- Explore possibility of creating an hard-to-beat/unbeatable AI (minmax algorithm)
+- Explore possibility of creating an hard-to-beat/unbeatable AI (minimax algorithm)
 - Interface that allows players to display whether or not they've won
