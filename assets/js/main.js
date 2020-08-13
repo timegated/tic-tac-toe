@@ -1,7 +1,7 @@
-import { gameBoard, renderGameBoard } from './modules/gameBoard.js';
-import { gameBoardDisplay } from './modules/elements.js';
+import gameBoard from './modules/gameBoard.js';
+import { gameBoardDisplay, displayMessage } from './modules/elements.js';
 
+const { board, renderGameBoard } = gameBoard;
 
 console.log(gameBoard);
-console.log(gameBoardDisplay);
-renderGameBoard(gameBoard, gameBoardDisplay);
+

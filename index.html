@@ -9,21 +9,26 @@
 </head>
 <body>
   <main>
-    <form>
-      <div class="form-group">
-        <label for="player1">Player 1</label>
-        <input type="text" name="player1" id="player1" placeholder="Your Name">
-      </div>
-      <div class="form-group">
-        <label for="player2">Player 2</label>
-        <input type="text" name="player2" id="player2" placeholder="Your Name">
-      </div>
-    </form>
+    <section class="main-menu hidden">
+      <form class="settingsForm" onSubmit="return false">
+        <div class="form-group">
+          <label for="player1">Player 1</label>
+          <input type="text" name="player1" id="player1" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label for="player2">Player 2</label>
+          <input type="text" name="player2" id="player2" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <button id="play-ai" class="btn">Play Against AI</button>
+        </div>
+      </form>
+    </section>
     <section id="dialog-box">
       <p id="message"></p>
       <article>
-        <button id="new-round" class="btn-msg">New Round</button>
-        <button id="new-game" class="btn-msg">New Game</button>
+        <button id="new-round" class="btn msg">New Round</button>
+        <button id="new-game" class="btn msg">New Game</button>
       </article>
     </section>
     <section id="gameboard"></section>
