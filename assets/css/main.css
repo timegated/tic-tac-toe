@@ -35,6 +35,11 @@
   background: black;
   color: #ebebeb;
 }
+.btn:focus {
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  font-size: 18px;
+}
 
 main {
   display: flex;
