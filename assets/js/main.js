@@ -1,8 +1,5 @@
-import gameBoard from './modules/UI/gameBoard.js';
-import { gameBoardDisplay, displayMessage } from './modules/UI/elements.js';
+import { gameModule } from './modules/Game/gameModule.js';
 
-const { board, renderGameBoard } = gameBoard;
+const { startGame } = gameModule;
 
-console.log(board);
-
-renderGameBoard(board, gameBoardDisplay);
+startGame();

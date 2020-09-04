@@ -1,5 +1,5 @@
-const gameBoard = {
-	board: [
+export const gameBoard = (() => {
+	const board = [
 		{
 			row: 'top',
 			column: 'left',
@@ -42,9 +42,9 @@ const gameBoard = {
 			column: 'right',
 			d1: 'd1',
 		},
-	],
-	renderGameBoard: function (arr, el) {
-		for (let i = 0; i <= arr.length; i++) {
+	]
+	const renderGameBoard = (arr, el) => {
+		for (let i = 0; i < arr.length; i++) {
 			const cell = document.createElement('div');
 			cell.classList.add('cell', arr[i].row, arr[i].column);
 			if (arr[i].d1) {
@@ -59,13 +59,15 @@ const gameBoard = {
 			cell.setAttribute('id', i);
 			el.appendChild(cell);
 		}
-	},
-	clearDisplay: function (arr) {
+	}
+
+	const clearDisplay = (arr) => {
 		while (arr.firstChild) {
 			arr.removeChild(arr.firstChild);
 		}
-	},
-	renderDisplayMsg: function (display, msgEl, outcome = null) {
+	}
+
+	const renderDisplayMsg = (display, msgEl, outcome = null) => {
 		display.clearDisplay();
 		if (outcome === 'win') {
 			msgEl.textContent = `${gameModule.activePlayer.getName()} won!`;
@@ -73,13 +75,19 @@ const gameBoard = {
 			msgEl.textContent = `It's a tie`;
 		}
 		display.appendChild(msgEl);
-  },
-  displayGameResult: function (gameResult, row=null) {
+	}
+	
+  const displayGameResult = (gameResult, row=null) => {
     if(row) {
       row.forEach((cell) => cell.classList.add('win'));
       setTimeout(() => this.renderDisplayMsg(gameResult), 1000);
     }
-  }
-};
-
-export default gameBoard;
+	}
+	return {
+		board,
+		renderGameBoard,
+		clearDisplay,
+		renderDisplayMsg,
+		displayGameResult
+	}
+})();

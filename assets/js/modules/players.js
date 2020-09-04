@@ -1,4 +1,4 @@
-const players = (name, marker, type) => {
+export const players = (name, marker, type) => {
     const display = document.querySelector(marker);
     display.textContent = name;
 
@@ -22,5 +22,3 @@ const players = (name, marker, type) => {
         removeActiveStyle
     }
 };
-
-export default players;

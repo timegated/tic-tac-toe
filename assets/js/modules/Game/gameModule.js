@@ -1,6 +1,26 @@
+import { gameBoard } from '../UI/gameBoard.js';
+import { setCellListeners } from '../UI/cellListeners.js';
 import players from '../players.js';
+import {
+	saveButton,
+	startButton,
+	refreshButton,
+	settingsButton,
+	settingsMenu,
+	aiSettings,
+	humanSettings,
+	aiModeButton,
+	humanModeButton,
+	aiPlayerX,
+	aiCheckboxX,
+	aiPlayerO,
+	aiCheckboxO,
+	cancelButton
+} from '../UI/elements.js';
 
-const gameModule = () => {
+const { board, renderGameBoard, clearDisplay, displayGameResult } = gameBoard;
+
+export const gameModule = (() => {
 	let playerOne = players('Player X', 'X', true);
 	let playerTwo = players('Player O', 'O', true);
 
@@ -55,21 +75,36 @@ const gameModule = () => {
 		playerO = playersFactory(nameO, 'O', playerOType);
 	};
 	
-	const saveButton = document.querySelector('#save');
+	
 	saveButton.addEventListener('click', function () {
 		setGameInfo();
 		document.querySelector('.settings-menu').classList.add('hidden');
 		startGame();
 	});
 
+	const startGame = () => {
+		gameStarted = true;
+		gameBoardModule.clearDisplay();
+		gameBoardModule.renderGameBoard();
+		setCellListeners();
+		playersArray.forEach((player) => {
+			player.removeActiveStyle();
+		});
+		gameModule.activePlayer = playerX;
+		gameModule.activePlayer.toggleActiveStyle();
+		if (!gameModule.activePlayer.isHuman()) {
+			makeAIMove();
+		}
+	};
+
 	const endRound = (grid, cell) => {
 		if (hasWon(grid, cell)) {
 			gameStarted = false;
 			const winningComb = getWinningComb(cell, grid);
-			gameBoardModule.displayGameResult('win', winningComb);
+			displayGameResult('win', winningComb);
 		} else if (isTie(grid)) {
 			gameStarted = false;
-			gameBoardModule.displayGameResult('tie');
+			displayGameResult('tie');
 		} else {
 			toggleTurn();
 		}
@@ -191,7 +226,8 @@ const gameModule = () => {
 			return true;
 		}
 	};
-	const startButton = document.querySelector('#play');
+
+	
 	startButton.addEventListener('click', function () {
 		if (!gameStarted) {
 			clearSound.play();
@@ -199,23 +235,21 @@ const gameModule = () => {
 		}
 	});
 
-	const refreshButton = document.querySelector('#restart');
+
 	refreshButton.addEventListener('click', function () {
 		clearSound.currentTime = 0;
 		clearSound.play();
 		startGame();
 	});
 
-	const settingsButton = document.querySelector('#settings');
-	const settingsMenu = document.querySelector('.settings-menu');
+
 	settingsButton.addEventListener('click', function () {
 		settingsMenu.classList.remove('hidden');
 	});
 
-	const aiSettings = document.querySelector('.ai-mode');
-	const humanSettings = document.querySelector('.human-mode');
 
-	const aiModeButton = document.getElementById('ai');
+
+
 	aiModeButton.addEventListener('change', function () {
 		if (aiModeButton.checked === true) {
 			aiSettings.classList.remove('hidden');
@@ -223,7 +257,7 @@ const gameModule = () => {
 		}
 	});
 
-	const humanModeButton = document.getElementById('human');
+	
 	humanModeButton.addEventListener('change', function () {
 		if (humanModeButton.checked === true) {
 			humanSettings.classList.remove('hidden');
@@ -236,19 +270,19 @@ const gameModule = () => {
 		selectedPlayer.setAttribute('placeholder', `Player ${marker}`);
 		otherPlayer.setAttribute('placeholder', 'AI');
 	};
-	const aiPlayerX = document.querySelector('.ai-x');
-	const aiCheckboxX = document.querySelector('#ai-player-x');
+	
+	
 	aiPlayerX.addEventListener('focus', () => {
 		setAiPlayer(aiPlayerX, 'X', aiPlayerO, aiCheckboxX);
 	});
 
-	const aiPlayerO = document.querySelector('.ai-o');
-	const aiCheckboxO = document.querySelector('#ai-player-o');
+
+	
 	aiPlayerO.addEventListener('focus', () => {
 		setAiPlayer(aiPlayerO, 'O', aiPlayerX, aiCheckboxO);
 	});
 
-	const cancelButton = document.querySelector('#cancel');
+
 	cancelButton.addEventListener('click', function () {
 		settingsMenu.classList.add('hidden');
 		humanSettings.classList.remove('hidden');
@@ -262,6 +296,6 @@ const gameModule = () => {
 		playerX,
 		playerO,
 		activePlayer,
-		startGame,
+		startGame
 	};
-};
+})();
