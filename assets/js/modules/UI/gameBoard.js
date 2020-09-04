@@ -1,3 +1,6 @@
+import { gameBoardDisplay, displayMessage } from './elements.js';
+import { gameModule } from '../Game/gameModule.js';
+
 export const gameBoard = (() => {
 	const board = [
 		{
@@ -66,21 +69,23 @@ export const gameBoard = (() => {
 			arr.removeChild(arr.firstChild);
 		}
 	}
+	
+	displayMessage.classList.add('display-message');
 
-	const renderDisplayMsg = (display, msgEl, outcome = null) => {
-		display.clearDisplay();
+	const renderDisplayMsg = (outcome = null) => {
+		clearDisplay(board);
 		if (outcome === 'win') {
-			msgEl.textContent = `${gameModule.activePlayer.getName()} won!`;
+			displayMessage.textContent = `${gameModule.activePlayer.getName()} won!`;
 		} else if (outcome === 'draw') {
-			msgEl.textContent = `It's a tie`;
+			displayMessage.textContent = `It's a tie`;
 		}
-		display.appendChild(msgEl);
+		gameBoardDisplay.appendChild(displayMessage);
 	}
 	
   const displayGameResult = (gameResult, row=null) => {
     if(row) {
       row.forEach((cell) => cell.classList.add('win'));
-      setTimeout(() => this.renderDisplayMsg(gameResult), 1000);
+      setTimeout(() => renderDisplayMsg(gameResult), 500);
     }
 	}
 	return {

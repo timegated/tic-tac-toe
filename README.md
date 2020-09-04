@@ -9,10 +9,10 @@
 
 - [x] Set up basic files with HTML/JS/CSS, for this I'll be using ES6 modules to structure the JS files
 - [x] Architecture: modules or factories, our first variables are gameBoard and displayController, using factories for multiple players
-- [] Players can make X's and O's on the gameboard. Adding eventlisteners to the cells.
-- Build logic that checks when the game is over
-- Consider option of having players compete against the computer
-- Explore possibility of creating an hard-to-beat/unbeatable AI (minimax algorithm)
+- [x] Players can make X's and O's on the gameboard. Adding eventlisteners to the cells.
+- [] Build logic that checks when the game is over
+- [] Consider option of having players compete against the computer
+- [] Explore possibility of creating an hard-to-beat/unbeatable AI (minimax algorithm)
 
 ### HTML
 

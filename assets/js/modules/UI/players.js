@@ -1,5 +1,5 @@
 export const players = (name, marker, type) => {
-    const display = document.querySelector(marker);
+    const display = document.getElementById(marker);
     display.textContent = name;
 
     const getName = () => name;

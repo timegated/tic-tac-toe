@@ -1,7 +1,8 @@
 import { gameBoard } from '../UI/gameBoard.js';
 import { setCellListeners } from '../UI/cellListeners.js';
-import players from '../players.js';
+import { players } from '../UI/players.js';
 import {
+	gameBoardDisplay,
 	saveButton,
 	startButton,
 	refreshButton,
@@ -18,15 +19,15 @@ import {
 	cancelButton
 } from '../UI/elements.js';
 
-const { board, renderGameBoard, clearDisplay, displayGameResult } = gameBoard;
+const { board, renderGameBoard, clearDisplay, displayGameResult, renderDisplayMsg } = gameBoard;
 
 export const gameModule = (() => {
-	let playerOne = players('Player X', 'X', true);
-	let playerTwo = players('Player O', 'O', true);
+	let playerX = players('Player X', 'X', true);
+	let playerO = players('Player O', 'O', true);
 
-	const playersArray = [playerOne, playerTwo];
+	const playersArray = [playerX, playerO];
 
-	const settings = document.form['settingsForm'];
+	const settings = document.querySelector('.settingsForm');
 
 	let activePlayer = null;
 	let gameStarted = null;
@@ -71,8 +72,8 @@ export const gameModule = (() => {
 			nameO = 'Player O';
 		}
 
-		playerX = playersFactory(nameX, 'X', playerXType);
-		playerO = playersFactory(nameO, 'O', playerOType);
+		playerX = playersFactory(nameX, '#X', playerXType);
+		playerO = playersFactory(nameO, '#O', playerOType);
 	};
 	
 	
@@ -84,9 +85,9 @@ export const gameModule = (() => {
 
 	const startGame = () => {
 		gameStarted = true;
-		gameBoardModule.clearDisplay();
-		gameBoardModule.renderGameBoard();
-		setCellListeners();
+		clearDisplay(board);
+		renderGameBoard(board, gameBoardDisplay);
+		setCellListeners(gameStarted, isEmpty, markCell, endRound);
 		playersArray.forEach((player) => {
 			player.removeActiveStyle();
 		});
@@ -101,6 +102,7 @@ export const gameModule = (() => {
 		if (hasWon(grid, cell)) {
 			gameStarted = false;
 			const winningComb = getWinningComb(cell, grid);
+			console.log(winningComb);
 			displayGameResult('win', winningComb);
 		} else if (isTie(grid)) {
 			gameStarted = false;
@@ -129,8 +131,6 @@ export const gameModule = (() => {
 
 	const markCell = (cell) => {
 		cell.textContent = gameModule.activePlayer.getMarker();
-		chalkSound.currentTime = 0;
-		chalkSound.play();
 	};
 
 	const hasWon = (cellsArr, clickedCell) => {
@@ -200,7 +200,7 @@ export const gameModule = (() => {
 	const getWinningComb = (clickedCell, cells) => {
 		const currentRow = getCurrentRow(clickedCell, cells);
 		const currentColumn = getCurrentColumn(clickedCell, cells);
-
+		let winningComb;
 		const d1 = cells.filter((item) => item.classList.contains('d1'));
 		const d2 = cells.filter((item) => item.classList.contains('d2'));
 
@@ -215,6 +215,12 @@ export const gameModule = (() => {
 		}
 		return winningComb;
 	};
+
+	const isEmpty = (cell) => {
+		if (!cell.textContent) return true;
+		return false;
+	};
+
 	const isTie = (cells) => {
 		let result = cells.every(function (item) {
 			if (item.textContent !== '') {
@@ -230,15 +236,12 @@ export const gameModule = (() => {
 	
 	startButton.addEventListener('click', function () {
 		if (!gameStarted) {
-			clearSound.play();
 			startGame();
 		}
 	});
 
 
 	refreshButton.addEventListener('click', function () {
-		clearSound.currentTime = 0;
-		clearSound.play();
 		startGame();
 	});
 
