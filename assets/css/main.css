@@ -23,19 +23,22 @@
   border-radius: 10px;
 }
 
-.btn {
+.settings-btn {
   padding: 0.4rem;
   margin: 0.4rem;
   border-radius: 10px;
   width: 100%;
-  background: cyan;
+  background: dodgerblue;
   border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: #FFFFFF;
 }
-.btn:hover {
+.settings-btn:hover {
   background: black;
-  color: #ebebeb;
+  color: #EBEBEB;
 }
-.btn:focus {
+.settings-btn:focus {
   border-radius: 10px;
   transition: all 0.5s ease;
   font-size: 18px;
@@ -46,8 +49,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  align-content: center;
 }
 
 /*# sourceMappingURL=main.css.map */

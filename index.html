@@ -4,37 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="assets/css/main.css">
-  
   <title>Tic Tac Toe</title>
 </head>
 <body>
   <main>
     <section class="main-menu hidden">
-      <form class="settingsForm" onSubmit="return false">
+      <form class="settingsForm" onsubmit="return false">
         <div class="form-group">
-          <label for="player1">Player 1</label>
-          <input type="text" name="player1" id="player1" placeholder="Your Name">
+          <input type="radio" name="mode" id="human" value="human" checked>
+          <label for="human">Play Against A Friend</label>
         </div>
         <div class="form-group">
-          <label for="player2">Player 2</label>
-          <input type="text" name="player2" id="player2" placeholder="Your Name">
+          <input type="radio" name="mode" id="ai" value="ai">
+          <label for="ai">Play Against Computer</label>
         </div>
-        <div class="form-group">
-          <button id="start-game" class="btn">Start Game</button>
-        </div>
-        <div class="form-group">
-          <button id="play-ai" class="btn">Play Against AI</button>
-        </div>
+       <div class="mode-settings human-mode">
+         <p class="mode">Players</p>
+         <input type="text" name="player-x" id="human-player-x" placeholder="Player X" maxLength="15">
+         <br>
+         <input type="text" name="player-o" id="human-player-o" placeholder="Player O" maxLength="15">
+       </div>
+       <div class="mode-settings ai-mode hidden">
+        <p class="mode">Players</p>
+        <input type="radio" name="player" id="ai-player-x" value="player-x" class="ai-player" checked>
+        <label for="ai-player-x">
+          <input type="text" class="ai-mode-input ai-x" name="player-x" placeholder="Player X" maxLength="15">
+        </label>
+       </div>
+       <div class="button-container">
+         <button type="reset" class="settings-btn" id="cancel">Cancel</button>
+         <button type="submit" class="settings-btn" id="save">Save</button>
+       </div>
       </form>
     </section>
-    <section id="dialog-box">
-      <p id="message"></p>
-      <article>
-        <button id="new-round" class="btn msg">New Round</button>
-        <button id="new-game" class="btn msg">New Game</button>
-      </article>
-    </section>
-    <section id="gameboard"></section>
+  <header>
+    <h1>Play Tic-Tac-Toe</h1>
+  </header>
+  <section class="game-area">
+    <div class="players-display">
+      <p class="player" id="X"></p>
+      <p class="player" id="O"></p>
+    </div>
+      <div id="gameboard">
+        <!-- Game Board Generated Here -->
+      </div>
+      <div class="settings-container">
+        <button class="settings-btn" id="play">Play</button>
+        <button class="settings-btn" id="settings">Settings</button>
+        <button class="settings-btn" id="restart">Restart</button>
+      </div>
+  </section>
   </main>
   <script type="module" src="/assets/js/main.js"></script>
 </body>

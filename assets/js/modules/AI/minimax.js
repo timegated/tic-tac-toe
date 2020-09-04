@@ -60,3 +60,28 @@ export const minimax = (board, player, cell) => {
 
   return moves[bestMove];
 };
+
+export const makeAIMove = () => {
+  setTimeout(function () {
+    const allCells = Array.from(document.querySelectorAll('.cell'));
+
+    let emptySpots = allCells.filter(isEmpty);
+
+    if (emptySpots.length === 9) {
+      let index = Math.floor(Math.random() * 9);
+      markCell(allCells[index]);
+      endRound(allCells, allCells[index]);
+    } else {
+      let bestSpot = getBestSpot(allCells);
+      markCell(bestSpot);
+      endRound(allCells, bestSpot);
+    }
+  }, 250);
+};
+
+export const isEmpty = (cell) => {
+  if (!cell.textContent) {
+    return true;
+  }
+  return false;
+};

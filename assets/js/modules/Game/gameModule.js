@@ -1,10 +1,10 @@
 import players from '../players.js';
 
-const gameModule = (() => {
+const gameModule = () => {
 	let playerOne = players('Player X', 'X', true);
 	let playerTwo = players('Player O', 'O', true);
 
-	const playerArray = [playerOne, playerTwo];
+	const playersArray = [playerOne, playerTwo];
 
 	const settings = document.form['settingsForm'];
 
@@ -54,20 +54,7 @@ const gameModule = (() => {
 		playerX = playersFactory(nameX, 'X', playerXType);
 		playerO = playersFactory(nameO, 'O', playerOType);
 	};
-	const startGame = () => {
-		gameStarted = true;
-		gameBoardModule.clearDisplay();
-		gameBoardModule.renderGameBoard();
-		setCellListeners();
-		arrPlayers.forEach((player) => {
-			player.removeActiveStyle();
-		});
-		gameModule.activePlayer = playerX;
-		gameModule.activePlayer.toggleActiveStyle();
-		if (!gameModule.activePlayer.isHuman()) {
-			makeAIMove();
-		}
-	};
+	
 	const saveButton = document.querySelector('#save');
 	saveButton.addEventListener('click', function () {
 		setGameInfo();
@@ -75,19 +62,6 @@ const gameModule = (() => {
 		startGame();
 	});
 
-	const setCellListeners = () => {
-		const cells = Array.from(document.querySelectorAll('.cell'));
-		for (let i = 0; i < cells.length; i++) {
-			cells[i].addEventListener('click', function (e) {
-				if (gameStarted) {
-					if (isEmpty(cells[i])) {
-						markCell(cells[i]);
-						endRound(cells, cells[i]);
-					}
-				}
-			});
-		}
-	};
 	const endRound = (grid, cell) => {
 		if (hasWon(grid, cell)) {
 			gameStarted = false;
@@ -100,49 +74,30 @@ const gameModule = (() => {
 			toggleTurn();
 		}
 	};
+
 	const toggleTurn = () => {
 		if (gameModule.activePlayer === playerX) {
 			gameModule.activePlayer = playerO;
 		} else if (gameModule.activePlayer === playerO) {
 			gameModule.activePlayer = playerX;
 		}
-		arrPlayers.forEach((player) => player.toggleActiveStyle());
+		playersArray.forEach((player) => player.toggleActiveStyle());
 
 		if (!gameModule.activePlayer.isHuman()) {
 			makeAIMove();
 		}
 	};
+
 	const getBestSpot = (cells) => {
 		return minimax(cells, gameModule.activePlayer).index;
 	};
-	const makeAIMove = () => {
-		setTimeout(function () {
-			const allCells = Array.from(document.querySelectorAll('.cell'));
 
-			let emptySpots = allCells.filter(isEmpty);
-
-			if (emptySpots.length === 9) {
-				let index = Math.floor(Math.random() * 9);
-				markCell(allCells[index]);
-				endRound(allCells, allCells[index]);
-			} else {
-				let bestSpot = getBestSpot(allCells);
-				markCell(bestSpot);
-				endRound(allCells, bestSpot);
-			}
-		}, 250);
-	};
-	const isEmpty = (cell) => {
-		if (!cell.textContent) {
-			return true;
-		}
-		return false;
-	};
 	const markCell = (cell) => {
 		cell.textContent = gameModule.activePlayer.getMarker();
 		chalkSound.currentTime = 0;
 		chalkSound.play();
 	};
+
 	const hasWon = (cellsArr, clickedCell) => {
 		const d1 = cellsArr.filter((item) => item.classList.contains('d1'));
 		const d2 = cellsArr.filter((item) => item.classList.contains('d2'));
@@ -206,6 +161,7 @@ const gameModule = (() => {
 		}
 		return column;
 	};
+	
 	const getWinningComb = (clickedCell, cells) => {
 		const currentRow = getCurrentRow(clickedCell, cells);
 		const currentColumn = getCurrentColumn(clickedCell, cells);
@@ -308,4 +264,4 @@ const gameModule = (() => {
 		activePlayer,
 		startGame,
 	};
-})();
+};

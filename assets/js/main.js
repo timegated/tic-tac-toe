@@ -3,6 +3,6 @@ import { gameBoardDisplay, displayMessage } from './modules/UI/elements.js';
 
 const { board, renderGameBoard } = gameBoard;
 
-console.log(gameBoard);
+console.log(board);
 
 renderGameBoard(board, gameBoardDisplay);
