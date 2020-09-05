@@ -64,9 +64,9 @@ export const gameBoard = (() => {
 		}
 	}
 
-	const clearDisplay = (arr) => {
-		while (arr.firstChild) {
-			arr.removeChild(arr.firstChild);
+	const clearDisplay = (element) => {
+		while (element.firstChild) {
+			element.removeChild(element.firstChild);
 		}
 	}
 	

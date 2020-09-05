@@ -2,21 +2,18 @@ import { gameBoard } from '../UI/gameBoard.js';
 import { setCellListeners } from '../UI/cellListeners.js';
 import { players } from '../UI/players.js';
 import {
+	startButtonListener,
+	saveButtonListener,
+	refreshListener,
+	settingsButtonListener,
+	aiModeListener,
+	humanModeListener,
+	aiXListener,
+	aiOListener,
+	cancelListener
+} from '../UI/eventListeners.js';
+import {
 	gameBoardDisplay,
-	saveButton,
-	startButton,
-	refreshButton,
-	settingsButton,
-	settingsMenu,
-	aiSettings,
-	humanSettings,
-	aiModeButton,
-	humanModeButton,
-	aiPlayerX,
-	aiCheckboxX,
-	aiPlayerO,
-	aiCheckboxO,
-	cancelButton
 } from '../UI/elements.js';
 
 const { board, renderGameBoard, clearDisplay, displayGameResult, renderDisplayMsg } = gameBoard;
@@ -75,17 +72,10 @@ export const gameModule = (() => {
 		playerX = playersFactory(nameX, '#X', playerXType);
 		playerO = playersFactory(nameO, '#O', playerOType);
 	};
-	
-	
-	saveButton.addEventListener('click', function () {
-		setGameInfo();
-		document.querySelector('.settings-menu').classList.add('hidden');
-		startGame();
-	});
 
 	const startGame = () => {
 		gameStarted = true;
-		clearDisplay(board);
+		clearDisplay(gameBoardDisplay);
 		renderGameBoard(board, gameBoardDisplay);
 		setCellListeners(gameStarted, isEmpty, markCell, endRound);
 		playersArray.forEach((player) => {
@@ -232,68 +222,16 @@ export const gameModule = (() => {
 			return true;
 		}
 	};
-
 	
-	startButton.addEventListener('click', function () {
-		if (!gameStarted) {
-			startGame();
-		}
-	});
-
-
-	refreshButton.addEventListener('click', function () {
-		startGame();
-	});
-
-
-	settingsButton.addEventListener('click', function () {
-		settingsMenu.classList.remove('hidden');
-	});
-
-
-
-
-	aiModeButton.addEventListener('change', function () {
-		if (aiModeButton.checked === true) {
-			aiSettings.classList.remove('hidden');
-			humanSettings.classList.add('hidden');
-		}
-	});
-
-	
-	humanModeButton.addEventListener('change', function () {
-		if (humanModeButton.checked === true) {
-			humanSettings.classList.remove('hidden');
-			aiSettings.classList.add('hidden');
-		}
-	});
-
 	const setAiPlayer = (selectedPlayer, marker, otherPlayer, input) => {
-		input.checked = true;
-		selectedPlayer.setAttribute('placeholder', `Player ${marker}`);
-		otherPlayer.setAttribute('placeholder', 'AI');
+  input.checked = true;
+  selectedPlayer.setAttribute('placeholder', `Player ${marker}`);
+  otherPlayer.setAttribute('placeholder', 'AI');
 	};
-	
-	
-	aiPlayerX.addEventListener('focus', () => {
-		setAiPlayer(aiPlayerX, 'X', aiPlayerO, aiCheckboxX);
-	});
 
-
-	
-	aiPlayerO.addEventListener('focus', () => {
-		setAiPlayer(aiPlayerO, 'O', aiPlayerX, aiCheckboxO);
-	});
-
-
-	cancelButton.addEventListener('click', function () {
-		settingsMenu.classList.add('hidden');
-		humanSettings.classList.remove('hidden');
-		aiSettings.classList.add('hidden');
-		aiPlayerX.setAttribute('placeholder', 'Player X');
-		aiPlayerO.setAttribute('placeholder', 'AI');
-		settings.reset();
-	});
+	saveButtonListener(setGameInfo, startGame);
+	refreshListener(startGame)
+	settingsButtonListener();
 
 	return {
 		playerX,
