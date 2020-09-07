@@ -1,29 +1,23 @@
 import { gameBoardModule } from '../UI/gameBoard.js';
+import { playersFactory } from './playersFactory.js';
+import {
+  saveButton,
+  startButton,
+  refreshButton,
+  settingsButton,
+  settingsMenu,
+  menuWrapper,
+  aiSettings,
+  humanSettings,
+  aiModeButton,
+  humanModeButton,
+  aiPlayerX,
+  aiCheckboxX,
+  aiPlayerO,
+  aiCheckboxO,
+  cancelButton
+} from '../UI/elements.js';
 
-const playersFactory = (name, marker, type) => {
-  const display = document.getElementById(marker);
-  display.textContent = name;
-
-  const getName = () => name;
-  const getMarker = () => marker;
-  const isHuman = () => type;
-
-  const toggleActiveStyle = () => {
-    display.classList.toggle('turn');
-  };
-
-  const removeActiveStyle = () => {
-    display.classList.remove('turn');
-  };
-
-  return {
-    getName,
-    getMarker,
-    isHuman,
-    toggleActiveStyle,
-    removeActiveStyle
-  };
-};
 
 export const gameModule = (() => { 
   let playerX = playersFactory('Player X', 'X', true);
@@ -35,23 +29,9 @@ export const gameModule = (() => {
 
   const players = [playerX, playerO];
 
-  const saveButton = document.querySelector('#save');
-  const startButton = document.querySelector('#play');
-  const refreshButton = document.querySelector('#restart');
-  const settingsButton = document.querySelector('#settings');
-  const settingsMenu = document.querySelector('.main-menu');
-  const aiSettings = document.querySelector('.ai-mode');
-  const humanSettings = document.querySelector('.human-mode');
-  const aiModeButton = document.getElementById("ai");
-  const humanModeButton = document.getElementById("human");
-  const aiPlayerX = document.querySelector(".ai-x");
-  const aiCheckboxX = document.querySelector("#ai-player-x");
-  const aiPlayerO = document.querySelector(".ai-o");
-  const aiCheckboxO = document.querySelector("#ai-player-o");
-  const cancelButton = document.querySelector("#cancel");
-
   const setGameInfo = () => {
     const gameMode = settings['mode'].value;
+    console.log(gameMode);
     let nameX;
     let nameO;
     let playerXType;
@@ -83,7 +63,7 @@ export const gameModule = (() => {
     }
 
     if (nameX === '') nameX = 'Player X';
-    if (nameO === '') nameX = 'Player O';
+    if (nameO === '') nameO = 'Player O';
 
     playerX = playersFactory(nameX, 'X', playerXType);
     playerO = playersFactory(nameO, 'O', playerOType);
@@ -126,6 +106,7 @@ export const gameModule = (() => {
     if (hasWon(grid, cell)) {
       gameStarted = false;
       const winComb = getWinningComb(cell, grid);
+      console.log(winComb)
       gameBoardModule.displayGameResult('win', winComb);
     } else if (isTie(grid)) {
       gameStarted = false;
@@ -231,6 +212,7 @@ export const gameModule = (() => {
     const d1 = cells.filter(item => item.classList.contains("d1"));
     const d2 = cells.filter(item => item.classList.contains("d2"));
 
+    let winComb;
     if (currentRow.every(hasSameMarker)) {
         winComb = currentRow;
     } else if (currentColumn.every(hasSameMarker)) {
@@ -283,7 +265,7 @@ export const gameModule = (() => {
         }
 
         const moves = [];
-
+        let currentMove;
         for (let i = 0; i < availableCells.length; i++) {
             let move = {};
             currentMove = board[board.indexOf(availableCells[i])];
@@ -331,6 +313,7 @@ export const gameModule = (() => {
   saveButton.addEventListener('click', function () {
     setGameInfo();
     document.querySelector('.main-menu').classList.add('hidden');
+    menuWrapper.classList.add('hidden');
     start();
   });
 
@@ -346,6 +329,7 @@ export const gameModule = (() => {
 
   settingsButton.addEventListener('click', function () {
     settingsMenu.classList.remove('hidden');
+    menuWrapper.classList.remove('hidden');
    });
 
   aiModeButton.addEventListener('click', function () {
@@ -372,6 +356,7 @@ export const gameModule = (() => {
 
   cancelButton.addEventListener('click', function () {
     settingsMenu.classList.add('hidden');
+    menuWrapper.classList.add('hidden');
     humanSettings.classList.remove('hidden');
     aiSettings.classList.add('hidden');
     aiPlayerX.setAttribute('placeholder', 'Player X');

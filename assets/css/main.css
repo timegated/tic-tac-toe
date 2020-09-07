@@ -1,6 +1,22 @@
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
 #gameboard {
   display: grid;
-  width: 50vw;
+  width: 90vw;
   height: 90vw;
   max-width: 500px;
   max-height: 500px;
@@ -44,10 +60,17 @@
   font-size: 18px;
 }
 
+.players-display {
+  width: 90%;
+  display: inherit;
+  font-size: 1.5rem;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
 .players-display .player {
-  padding: 0.5rem;
-  border-radius: 10px;
-  display: inline-block;
+  padding: 0.2rem;
+  margin-bottom: 0.5rem;
+  box-sizing: border-box;
 }
 
 .hidden {
@@ -55,23 +78,17 @@
 }
 
 .win {
-  background-color: rgba(100, 122, 203, 0.7);
+  background-color: rgba(100, 122, 203, 0.4);
 }
 
 .turn {
   background: #D9E2EC;
 }
 
-main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-}
-
-.wrapper-menu {
-  height: 90vh;
-  width: 50vw;
+.display-message {
+  display: block;
+  font-size: 24px;
+  margin: 3rem auto;
 }
 
 /*# sourceMappingURL=main.css.map */

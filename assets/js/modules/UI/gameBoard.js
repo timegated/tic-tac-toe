@@ -1,6 +1,7 @@
+import { gameModule } from '../Game/gameModule.js';
+
 export const gameBoardModule = (() => { 
 	const gameBoardDisplay = document.querySelector('#gameboard');
-	console.log(gameBoardDisplay.firstChild);
 	let displayMessage = document.createElement('p');
 	displayMessage.classList.add('display-message');
 
@@ -19,7 +20,6 @@ export const gameBoardModule = (() => {
 	const renderGameBoard = () => {
 		for (let i = 0; i < gameBoard.length; i++) {
 			const cell = document.createElement('div');
-			console.log(cell)
 			cell.classList.add('cell', gameBoard[i].row, gameBoard[i].column);
 			if (gameBoard[i].d1) cell.classList.add(gameBoard[i].d1);
 			if (gameBoard[i].d2) cell.classList.add(gameBoard[i].d2);
@@ -30,7 +30,7 @@ export const gameBoardModule = (() => {
 
 	const clearDisplay = () => {
 		while (gameBoardDisplay.firstChild) {
-			gameBoardDisplay.removeChild(gameBoardDisplay.firstchild);
+			gameBoardDisplay.removeChild(gameBoardDisplay.firstChild);
 		}
 	};
 
@@ -53,7 +53,7 @@ export const gameBoardModule = (() => {
 
 		setTimeout(() => {
 			renderDisplayMessage(gameResult)
-		}, 200);
+		}, 800);
 	};
 
 	return {
