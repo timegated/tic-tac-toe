@@ -1,6 +1,9 @@
 export const gameBoardModule = (() => { 
 	const gameBoardDisplay = document.querySelector('#gameboard');
 	console.log(gameBoardDisplay.firstChild);
+	let displayMessage = document.createElement('p');
+	displayMessage.classList.add('display-message');
+
 	const gameBoard = [
 		{row: "top", column: "left", d1: "d1"},
 		{row: "top", column: "middle",},
@@ -31,10 +34,33 @@ export const gameBoardModule = (() => {
 		}
 	};
 
+	const renderDisplayMessage = (outcome = null) => {
+		gameBoardModule.clearDisplay();
+		if (outcome === 'win') {
+			displayMessage.textContent = `${gameModule.activePlayer.getName()} won`;
+		} else if (outcome === 'tie') {
+			displayMessage.textContent = 'It\'s a tie';
+		}
+		gameBoardDisplay.appendChild(displayMessage);
+	};
+
+	const displayGameResult = (gameResult, row = null) => {
+		if (row) {
+			row.forEach(cell => {
+				cell.classList.add('win');
+			});
+		}
+
+		setTimeout(() => {
+			renderDisplayMessage(gameResult)
+		}, 200);
+	};
+
 	return {
 		gameBoard,
 		gameBoardDisplay,
 		renderGameBoard,
-		clearDisplay
+		clearDisplay,
+		displayGameResult
 	}
 })();

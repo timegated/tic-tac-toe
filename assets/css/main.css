@@ -8,7 +8,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   border-radius: 30px;
-  color: #000;
+  color: #243B53;
   margin-bottom: 1.5rem;
   position: relative;
 }
@@ -19,7 +19,7 @@
   align-items: center;
   font-size: 5rem;
   font-family: sans-serif;
-  border: 1px solid #000000;
+  border: 1px solid #829AB1;
   border-radius: 10px;
 }
 
@@ -44,13 +44,26 @@
   font-size: 18px;
 }
 
+.players-display .player {
+  padding: 0.5rem;
+  border-radius: 10px;
+  display: inline-block;
+}
+
 .hidden {
   display: none;
 }
 
+.win {
+  background-color: rgba(100, 122, 203, 0.7);
+}
+
+.turn {
+  background: #D9E2EC;
+}
+
 main {
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
   align-content: center;

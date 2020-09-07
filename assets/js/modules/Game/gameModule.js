@@ -97,7 +97,7 @@ export const gameModule = (() => {
 
   const start = () => {
     gameStarted = true;
-    // gameBoardModule.clearDisplay();
+    gameBoardModule.clearDisplay();
     gameBoardModule.renderGameBoard();
     setCellListeners();
     players.forEach(player => {
