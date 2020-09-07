@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.6.0/jasmine.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.6.0/jasmine-html.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.6.0/boot.min.js"></script>
+  <title>TTT-SpecRunner</title>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Tic-Tac-Toe</h1>
+    </header>
+    <section class="game-area">
+      <div class="players-display">
+        <p class="player" id="X"></p>
+        <p class="player" id="O"></p>
+      </div>
+        <div id="gameboard">
+          <!-- Game Board Generated Here -->
+        </div>
+        <div class="settings-container">
+          <button class="settings-btn" id="play">Play</button>
+          <button class="settings-btn" id="restart">Restart</button>
+        </div>
+    </section>
+    </main>
+  <script type="module" src="./assets/js/main.js"></script>
+  <script type="module" src="./assets/js/main.spec.js"></script>
+</body>
+</html>

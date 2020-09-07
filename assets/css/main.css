@@ -1,6 +1,6 @@
 #gameboard {
   display: grid;
-  width: 90vw;
+  width: 50vw;
   height: 90vw;
   max-width: 500px;
   max-height: 500px;
@@ -44,16 +44,21 @@
   font-size: 18px;
 }
 
+.hidden {
+  display: none;
+}
+
 main {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
   align-content: center;
 }
 
-.hidden {
-  display: none;
+.wrapper-menu {
+  height: 90vh;
+  width: 50vw;
 }
 
 /*# sourceMappingURL=main.css.map */

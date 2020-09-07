@@ -8,8 +8,9 @@
 </head>
 <body>
   <main>
+    <div class="wrapper-menu">
     <section class="main-menu hidden">
-      <form class="settingsForm" onsubmit="return false">
+      <form name="settingsForm" onsubmit="return false">
         <div class="form-group">
           <input type="radio" name="mode" id="human" value="human" checked>
           <label for="human">Play Against A Friend</label>
@@ -43,7 +44,9 @@
       </form>
     </section>
   <header>
-    <h1>Play Tic-Tac-Toe</h1>
+  </div>
+  <div class="wrapper-game">
+    <h1>Tic-Tac-Toe</h1>
   </header>
   <section class="game-area">
     <div class="players-display">
@@ -51,7 +54,7 @@
       <p class="player" id="O"></p>
     </div>
       <div id="gameboard">
-        <!-- Game Board Generated Here -->
+  
       </div>
       <div class="settings-container">
         <button class="settings-btn" id="play">Play</button>
@@ -59,6 +62,7 @@
         <button class="settings-btn" id="restart">Restart</button>
       </div>
   </section>
+  </div>
   </main>
   <script type="module" src="/assets/js/main.js"></script>
 </body>
