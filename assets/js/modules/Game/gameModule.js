@@ -6,7 +6,7 @@ import {
   refreshButton,
   settingsButton,
   settingsMenu,
-  menuWrapper,
+  menuForm,
   aiSettings,
   humanSettings,
   aiModeButton,
@@ -28,6 +28,11 @@ export const gameModule = (() => {
   let gameStarted = null;
 
   const players = [playerX, playerO];
+
+  const toggleSlideOut = () => {
+    settingsMenu.classList.toggle('cover-open');
+    menuForm.classList.toggle('menu-open');
+  };
 
   const setGameInfo = () => {
     const gameMode = settings['mode'].value;
@@ -106,7 +111,6 @@ export const gameModule = (() => {
     if (hasWon(grid, cell)) {
       gameStarted = false;
       const winComb = getWinningComb(cell, grid);
-      console.log(winComb)
       gameBoardModule.displayGameResult('win', winComb);
     } else if (isTie(grid)) {
       gameStarted = false;
@@ -138,7 +142,7 @@ export const gameModule = (() => {
   };
 
   const markCell = (cell) => {
-    cell.textContent = gameModule.activePlayer.getMarker();
+    cell.innerHTML = `<span class='marker'>${gameModule.activePlayer.getMarker()}</span>`;
   };
 
   const hasWon = (cellsArr, clickedCell) => {
@@ -312,8 +316,7 @@ export const gameModule = (() => {
 
   saveButton.addEventListener('click', function () {
     setGameInfo();
-    document.querySelector('.main-menu').classList.add('hidden');
-    menuWrapper.classList.add('hidden');
+    toggleSlideOut()
     start();
   });
 
@@ -328,9 +331,8 @@ export const gameModule = (() => {
   });
 
   settingsButton.addEventListener('click', function () {
-    settingsMenu.classList.remove('hidden');
-    menuWrapper.classList.remove('hidden');
-   });
+    toggleSlideOut()
+  });
 
   aiModeButton.addEventListener('click', function () {
     if (aiModeButton.checked === true) {
@@ -355,8 +357,7 @@ export const gameModule = (() => {
    });
 
   cancelButton.addEventListener('click', function () {
-    settingsMenu.classList.add('hidden');
-    menuWrapper.classList.add('hidden');
+    toggleSlideOut()
     humanSettings.classList.remove('hidden');
     aiSettings.classList.add('hidden');
     aiPlayerX.setAttribute('placeholder', 'Player X');
@@ -364,6 +365,11 @@ export const gameModule = (() => {
     settings.reset();
    });
 
+  window.addEventListener('click', (e) => {
+    if (e.target === settingsMenu) {
+      toggleSlideOut()
+    }   
+  });
 
   return {
     playerX,

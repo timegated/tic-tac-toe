@@ -7,40 +7,42 @@
   <title>Tic Tac Toe</title>
 </head>
 <body>
-  <main>
-    <section class="main-menu hidden">
-      <form name="settingsForm" onsubmit="return false">
-          <input type="radio" name="mode" id="human" value="human" checked>
-          <label for="human">Play Against A Friend</label>
-          <input type="radio" name="mode" id="ai" value="ai">
-          <label for="ai">Play Against Computer</label>
-       <div class="mode-settings human-mode">
-         <p class="mode">Players</p>
-         <input type="text" name="player-x" id="human-player-x" placeholder="Player X" maxLength="15">
-         <br>
-         <input type="text" name="player-o" id="human-player-o" placeholder="Player O" maxLength="15">
-       </div>
-       <div class="mode-settings ai-mode hidden">
-        <p class="mode">Players</p>
-        <input type="radio" name="player" id="ai-player-x" value="player-x" class="ai-player" checked>
-        <label for="ai-player-x">
-          <input type="text" class="ai-mode-input ai-x" name="player-x" placeholder="Player X" maxLength="10">
-        </label>
-        <br>
-        <input type="radio" name="player" id="ai-player-o" value="player-o" class="ai-player">
-        <label for="ai-player-o">
-          <input type="text" name="player-o" class="ai-mode-input ai-o" placeholder="AI" maxLength="10">
-        </label>
-       </div>
-       <div class="button-container">
-         <button type="reset" class="settings-btn" id="cancel">Cancel</button>
-         <button type="submit" class="settings-btn" id="save">Save</button>
-       </div>
-      </form>
-    </section>
+  <section class="main-menu">
+    <form name="settingsForm" onsubmit="return false" class="main-menu__form">
+      <div class="main-menu__content">
+        <input type="radio" name="mode" id="human" value="human" checked>
+        <label for="human">Play Against A Friend</label>
+        <input type="radio" name="mode" id="ai" value="ai">
+        <label for="ai">Play Against Computer</label>
+     <div class="mode-settings human-mode">
+       <p class="mode">Players</p>
+       <input type="text" name="player-x" id="human-player-x" placeholder="Player X" maxLength="15">
+       <br>
+       <input type="text" name="player-o" id="human-player-o" placeholder="Player O" maxLength="15">
+     </div>
+     <div class="mode-settings ai-mode hidden">
+      <p class="mode">Players</p>
+      <input type="radio" name="player" id="ai-player-x" value="player-x" class="ai-player" checked>
+      <label for="ai-player-x">
+        <input type="text" class="ai-mode-input ai-x" name="player-x" placeholder="Player X" maxLength="10">
+      </label>
+      <br>
+      <input type="radio" name="player" id="ai-player-o" value="player-o" class="ai-player">
+      <label for="ai-player-o">
+        <input type="text" name="player-o" class="ai-mode-input ai-o" placeholder="AI" maxLength="10">
+      </label>
+     </div>
+     <div class="button-container">
+       <button type="reset" class="settings-btn" id="cancel">Cancel</button>
+       <button type="submit" class="settings-btn" id="save">Save</button>
+     </div>
+    </form>
+      </div>
+  </section>
   <header>
     <h1>Tic-Tac-Toe</h1>
   </header>
+  <main>
   <section class="game-area">
     <div class="players-display">
       <p class="player" id="X"></p>
