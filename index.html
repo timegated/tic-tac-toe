@@ -9,11 +9,16 @@
 <body>
   <section class="main-menu">
     <form name="settingsForm" onsubmit="return false" class="main-menu__form">
+      <h1 class="settings-title">Settings</h1>
       <div class="main-menu__content">
-        <input type="radio" name="mode" id="human" value="human" checked>
-        <label for="human">Play Against A Friend</label>
-        <input type="radio" name="mode" id="ai" value="ai">
-        <label for="ai">Play Against Computer</label>
+        <div class="form-group">
+          <input type="radio" name="mode" id="human" value="human" checked>
+          <label for="human">Play Against A Friend</label>
+        </div>
+        <div class="form-group">
+          <input type="radio" name="mode" id="ai" value="ai">
+          <label for="ai">Play Against Computer</label>
+        </div>
      <div class="mode-settings human-mode">
        <p class="mode">Players</p>
        <input type="text" name="player-x" id="human-player-x" placeholder="Player X" maxLength="15">

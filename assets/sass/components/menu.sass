@@ -14,7 +14,7 @@
   z-index: -10
   transition: opacity 0.5s ease
   & .main-menu__form
-    // z-index: -10
+    z-index: -10
     width: 20rem
     height: 100%
     background: #ffffff
@@ -23,8 +23,16 @@
     transition: transform 0.6s cubic-bezier(.56, -0.44, 0.37, 1.20)
   & .main-menu__content
     height: 100%
+  & .settings-title
+    font-size: 1.95rem
+    padding: 0.5rem
+    margin: 0 0 1.5rem 0
+    text-align: center
+    width: 100%
+    background:#D9E2EC
 .cover-open
   opacity: 1 !important
+  z-index: 10 !important
 .menu-open
   transform: translateX(0) !important
-  z-index: 200 !important
+  z-index: 20 !important
