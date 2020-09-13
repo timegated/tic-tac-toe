@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 html {
   height: 100%;
 }
@@ -11,6 +12,7 @@ body {
   box-sizing: border-box;
   background: #F0F4F8;
   height: 100%;
+  font-family: Roboto, sans-serif;
 }
 
 main {
@@ -55,6 +57,7 @@ main {
   background: #BCCCDC;
   border: none;
   text-transform: uppercase;
+  font-family: Roboto, sans-serif;
   font-size: 18px;
   font-weight: bold;
   color: #102A43;
